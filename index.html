@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Bartender Style - Eventos Inesquecíveis</title>
+      <script src="https://cdn.tailwindcss.com"></script>
+      <link
+         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Poppins:wght@300;400;500;600;700&display=swap"
+         rel="stylesheet"
+      />
+      <link
+         rel="stylesheet"
+         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2j+PxH1tPq80Jp+eu/Fm2u/f6c/K1I5a3p16A=="
+         crossorigin="anonymous"
+         referrerpolicy="no-referrer"
+      />
+
+      <style>
+         /* Cores Personalizadas (Tailwind JIT) */
+         :root {
+            --color-primary-light: #a7f3d0; /* Verde Limão Claro */
+            --color-primary-dark: #6ee7b7; /* Verde Limão Principal */
+            --color-secondary-light: #e879f9; /* Rosa Fúcsia Claro */
+            --color-secondary-dark: #d946ef; /* Rosa Fúcsia Principal */
+         }
+         .bg-gradient-primary {
+            background-image: linear-gradient(
+               to right,
+               var(--color-primary-dark),
+               var(--color-secondary-dark)
+            );
+         }
+         .text-gradient-primary {
+            background-image: linear-gradient(
+               to right,
+               var(--color-primary-dark),
+               var(--color-secondary-dark)
+            );
+            background-clip: text; /* Adicionando a propriedade padrão para compatibilidade */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+         }
+
+         /* Fontes */
+         body {
+            font-family: "Poppins", sans-serif;
+         }
+         h1,
+         h2,
+         h3,
+         h4,
+         h5,
+         h6 {
+            font-family: "Montserrat", sans-serif;
+         }
+
+         /* Efeitos de Rolagem */
+         .scroll-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+         }
+         .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+         }
+
+         /* Efeito de Hover para Cards */
+         .card-hover:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+         }
+
+         /* Estilo do botão de voltar ao topo */
+         #backToTopBtn {
+            display: none; /* Escondido por padrão */
+            position: fixed; /* Fixo na tela */
+            bottom: 20px; /* 20px do fundo */
+            right: 20px; /* 20px da direita */
+            z-index: 99; /* Garante que fique acima de outros elementos */
+            border: none; /* Remove a borda */
+            outline: none; /* Remove o contorno */
+            background-color: #d946ef; /* Cor de fundo */
+            color: white; /* Cor do texto */
+            cursor: pointer; /* Cursor de clique */
+            padding: 15px; /* Preenchimento */
+            border-radius: 50%; /* Borda arredondada para ser um círculo */
+            font-size: 18px; /* Tamanho da fonte */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra */
+            transition: background-color 0.3s ease;
+         }
+
+         #backToTopBtn:hover {
+            background-color: #a7f3d0; /* Cor de fundo ao passar o mouse */
+         }
+
+         /* Estilos para o Acordeão (FAQ) */
+         .accordion-item {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+         }
+         .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            cursor: pointer;
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600; /* font-semibold */
+            color: white;
+            transition: color 0.3s ease;
+         }
+         .accordion-header:hover {
+            color: #a7f3d0; /* hover:text-lime-400 */
+         }
+         .accordion-icon {
+            transform: rotate(0deg);
+            transition: transform 0.3s ease;
+         }
+         .accordion-header.active .accordion-icon {
+            transform: rotate(180deg);
+         }
+         .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            padding-bottom: 0;
+         }
+         .accordion-content.open {
+            max-height: 200px; /* Valor arbitrário, ajuste conforme o conteúdo */
+            padding-bottom: 1.5rem; /* py-6 */
+         }
+      </style>
+   </head>
+   <body class="bg-gray-900 text-gray-300 antialiased">
+      <header
+         id="site-header"
+         class="fixed top-0 left-0 right-0 z-50 py-4 transition-all duration-300 ease-in-out"
+      >
+         <div class="container mx-auto flex justify-between items-center px-6">
+            <a
+               href="#hero"
+               class="text-3xl font-extrabold text-gradient-primary"
+               >Bartender Style</a
+            >
+            <nav>
+               <ul class="flex space-x-8">
+                  <li>
+                     <a
+                        href="#sobre"
+                        class="text-white hover:text-lime-400 text-lg font-medium transition duration-300"
+                        >Sobre</a
+                     >
+                  </li>
+                  <li>
+                     <a
+                        href="#servicos"
+                        class="text-white hover:text-lime-400 text-lg font-medium transition duration-300"
+                        >Serviços</a
+                     >
+                  </li>
+                  <li>
+                     <a
+                        href="#faq"
+                        class="text-white hover:text-lime-400 text-lg font-medium transition duration-300"
+                        >FAQ</a
+                     >
+                  </li>
+                  <li>
+                     <a
+                        href="#drinks"
+                        class="text-white hover:text-lime-400 text-lg font-medium transition duration-300"
+                        >Drinks</a
+                     >
+                  </li>
+                  <li>
+                     <a
+                        href="#galeria"
+                        class="text-white hover:text-lime-400 text-lg font-medium transition duration-300"
+                        >Galeria</a
+                     >
+                  </li>
+                  <li>
+                     <a
+                        href="#depoimentos"
+                        class="text-white hover:text-lime-400 text-lg font-medium transition duration-300"
+                        >Depoimentos</a
+                     >
+                  </li>
+                  <li>
+                     <a
+                        href="#contato"
+                        class="text-white hover:text-lime-400 text-lg font-medium transition duration-300"
+                        >Contato</a
+                     >
+                  </li>
+               </ul>
+            </nav>
+         </div>
+      </header>
+
+      <section
+         id="hero"
+         class="relative h-screen flex items-center justify-center bg-cover bg-center"
+         style="background-image: url('img/hero-background.jpg')"
+      >
+         <div class="absolute inset-0 bg-black opacity-70"></div>
+         <div class="relative z-10 text-center px-6 scroll-reveal">
+            <h1
+               class="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-4 animate-fade-in-up"
+            >
+               Seu Evento, Nosso Estilo.
+            </h1>
+            <p
+               class="text-xl md:text-2xl text-gray-200 mb-8 max-w-2xl mx-auto animate-fade-in-up delay-200"
+            >
+               Bartender Style: A arte da coquetelaria levada ao seu evento, com
+               drinks exclusivos e uma experiência inesquecível.
+            </p>
+            <a
+               href="#contato"
+               class="inline-block bg-gradient-to-r from-lime-400 to-fuchsia-500 text-white font-bold py-4 px-10 rounded-full text-xl hover:shadow-lg transform hover:scale-105 transition duration-300 animate-fade-in-up delay-400"
+            >
+               Solicite um Orçamento
+            </a>
+         </div>
+      </section>
+
+      <section id="sobre" class="py-20 bg-gray-950">
+         <div
+            class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center"
+         >
+            <div class="scroll-reveal">
+               <img
+                  src="img/sobre-bartender.jpg"
+                  alt="Bartender preparando um drink"
+                  class="rounded-lg shadow-xl transform hover:scale-105 transition duration-300"
+               />
+            </div>
+            <div class="scroll-reveal">
+               <h2 class="text-4xl font-bold text-lime-400 mb-6">Quem Somos</h2>
+               <p class="text-lg text-gray-300 leading-relaxed mb-4">
+                  Na Bartender Style, acreditamos que cada evento é único e
+                  merece um toque especial. Somos uma equipe de bartenders
+                  apaixonados pela arte da coquetelaria, dedicados a transformar
+                  sua celebração em uma experiência memorável.
+               </p>
+               <p class="text-lg text-gray-300 leading-relaxed">
+                  Com criatividade, técnica e os melhores ingredientes,
+                  preparamos drinks que encantam o paladar e surpreendem os
+                  convidados, seja com opções alcoólicas clássicas ou criações
+                  não alcoólicas inovadoras. De casamentos a festas
+                  corporativas, garantimos estilo e sabor.
+               </p>
+            </div>
+         </div>
+      </section>
+
+      <section id="servicos" class="py-20 bg-gray-900">
+         <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold text-fuchsia-500 mb-12 scroll-reveal">
+               Nossos Serviços
+            </h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+               <div
+                  class="bg-gray-800 p-4 rounded-lg shadow-xl transform transition duration-300 card-hover scroll-reveal delay-100 text-center"
+               >
+                  <i
+                     class="fas fa-glass-whiskey text-6xl text-lime-400 mb-6 mx-auto"
+                  ></i>
+                  <h3 class="text-2xl font-bold text-white mb-4">
+                     Bares Personalizados
+                  </h3>
+                  <p class="text-gray-300 leading-relaxed">
+                     Montamos bares temáticos e personalizados para se adequar
+                     perfeitamente ao estilo do seu evento.
+                  </p>
+               </div>
+
+               <div
+                  class="bg-gray-800 p-8 rounded-lg shadow-xl transform transition duration-300 card-hover scroll-reveal delay-100 text-center"
+               >
+                  <i
+                     class="fas fa-glass-whiskey text-6xl text-lime-400 mb-6 mx-auto"
+                  ></i>
+                  <h3 class="text-2xl font-bold text-white mb-4">
+                     Coquetelaria Premium
+                  </h3>
+                  <p class="text-gray-300 leading-relaxed">
+                     Menu de drinks clássicos e autorais, utilizando bebidas de
+                     alta qualidade e ingredientes frescos.
+                  </p>
+               </div>
+
+               <div
+                  class="bg-gray-800 p-8 rounded-lg shadow-xl transform transition duration-300 card-hover scroll-reveal delay-200 text-center"
+               >
+                  <i
+                     class="fas fa-champagne-glasses text-6xl text-lime-400 mb-6 mx-auto"
+                  ></i>
+                  <h3 class="text-2xl font-bold text-white mb-4">
+                     Drinks Sem Álcool
+                  </h3>
+                  <p class="text-gray-300 leading-relaxed">
+                     Opções deliciosas e criativas de mocktails para todos os
+                     públicos, garantindo que ninguém fique de fora.
+                  </p>
+               </div>
+
+               <div
+                  class="bg-gray-800 p-8 rounded-lg shadow-xl transform transition duration-300 card-hover scroll-reveal delay-300 text-center"
+               >
+                  <i
+                     class="fas fa-cubes text-6xl text-lime-400 mb-6 mx-auto"
+                  ></i>
+                  <h3 class="text-2xl font-bold text-white mb-4">
+                     Pista de Dança LED 3D
+                  </h3>
+                  <p class="text-gray-300 leading-relaxed">
+                     Transforme sua festa com nossa pista de dança com efeitos
+                     3D e iluminação vibrante.
+                  </p>
+               </div>
+            </div>
+         </div>
+      </section>
+      <section id="faq" class="py-20 bg-gray-950">
+         <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold text-lime-400 mb-12 scroll-reveal">
+               Dúvidas Frequentes
+            </h2>
+            <div class="max-w-3xl mx-auto text-left">
+               <div class="accordion-item scroll-reveal">
+                  <div class="accordion-header" data-accordion="1">
+                     <span class="text-xl font-semibold text-white"
+                        >Quais regiões vocês atendem?</span
+                     >
+                     <i
+                        class="fas fa-chevron-down accordion-icon text-fuchsia-500"
+                     ></i>
+                  </div>
+                  <div class="accordion-content">
+                     <p class="text-gray-300 py-2">
+                        Atendemos eventos em toda a região metropolitana de São
+                        Paulo e cidades próximas. Para outras localidades, entre
+                        em contato para verificarmos a disponibilidade.
+                     </p>
+                  </div>
+               </div>
+               <div class="accordion-item scroll-reveal delay-100">
+                  <div class="accordion-header" data-accordion="2">
+                     <span class="text-xl font-semibold text-white"
+                        >Os ingredientes e utensílios estão inclusos?</span
+                     >
+                     <i
+                        class="fas fa-chevron-down accordion-icon text-fuchsia-500"
+                     ></i>
+                  </div>
+                  <div class="accordion-content">
+                     <p class="text-gray-300 py-2">
+                        Sim, nossos pacotes incluem todos os ingredientes
+                        (bebidas, frutas, xaropes, gelo), utensílios de bar e
+                        copos para los drinks. Você não precisa se preocupar com
+                        nada!
+                     </p>
+                  </div>
+               </div>
+               <div class="accordion-item scroll-reveal delay-200">
+                  <div class="accordion-header" data-accordion="3">
+                     <span class="text-xl font-semibold text-white"
+                        >É possível personalizar o cardápio de drinks?</span
+                     >
+                     <i
+                        class="fas fa-chevron-down accordion-icon text-fuchsia-500"
+                     ></i>
+                  </div>
+                  <div class="accordion-content">
+                     <p class="text-gray-300 py-2">
+                        Com certeza! Trabalhamos com você para criar um cardápio
+                        exclusivo que reflita o tema do seu evento e as
+                        preferências dos seus convidados, incluindo opções
+                        autorais.
+                     </p>
+                  </div>
+               </div>
+               <div class="accordion-item scroll-reveal delay-300">
+                  <div class="accordion-header" data-accordion="4">
+                     <span class="text-xl font-semibold text-white"
+                        >Vocês também trabalham com pista de dança e
+                        iluminação?</span
+                     >
+                     <i
+                        class="fas fa-chevron-down accordion-icon text-fuchsia-500"
+                     ></i>
+                  </div>
+                  <div class="accordion-content">
+                     <p class="text-gray-300 py-2">
+                        Sim! Além da coquetelaria completa, oferecemos serviços
+                        de Pista de Dança LED 3D e outros itens para tornar seu
+                        evento inesquecível. Consulte nossos pacotes.
+                     </p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <section id="drinks" class="py-20 bg-gray-900">
+         <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold text-fuchsia-500 mb-12 scroll-reveal">
+               Nosso Menu de Drinks
+            </h2>
+
+            <div class="flex justify-center mb-10 space-x-4 scroll-reveal">
+               <button
+                  class="tab-button bg-gray-800 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-fuchsia-500 transition duration-300 active-tab"
+                  data-target="alcoolicos"
+               >
+                  Alcoólicos
+               </button>
+               <button
+                  class="tab-button bg-gray-800 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-lime-400 transition duration-300"
+                  data-target="nao-alcoolicos"
+               >
+                  Não Alcoólicos
+               </button>
+            </div>
+
+            <div
+               id="alcoolicos"
+               class="tab-content grid md:grid-cols-3 gap-8 active"
+            >
+               <div
+                  class="bg-gray-800 p-6 rounded-lg shadow-xl card-hover scroll-reveal text-center"
+               >
+                  <img
+                     src="img/drink-mojito.jpg"
+                     alt="Mojito"
+                     class="w-full h-48 object-cover rounded mb-4"
+                  />
+                  <h3 class="text-2xl font-bold text-white mb-2">
+                     Mojito Clássico
+                  </h3>
+                  <p class="text-gray-400">
+                     Rum branco, hortelã, limão, açúcar e água com gás.
+                  </p>
+               </div>
+               <div
+                  class="bg-gray-800 p-6 rounded-lg shadow-xl card-hover scroll-reveal delay-100 text-center"
+               >
+                  <img
+                     src="img/drink-caipirinha.jpg"
+                     alt="Caipirinha"
+                     class="w-full h-48 object-cover rounded mb-4"
+                  />
+                  <h3 class="text-2xl font-bold text-white mb-2">
+                     Caipirinha Original
+                  </h3>
+                  <p class="text-gray-400">
+                     Cachaça, limão taiti, açúcar e gelo.
+                  </p>
+               </div>
+               <div
+                  class="bg-gray-800 p-6 rounded-lg shadow-xl card-hover scroll-reveal delay-200 text-center"
+               >
+                  <img
+                     src="img/drink-margarita.jpg"
+                     alt="Margarita"
+                     class="w-full h-48 object-cover rounded mb-4"
+                  />
+                  <h3 class="text-2xl font-bold text-white mb-2">
+                     Margarita Tropical
+                  </h3>
+                  <p class="text-gray-400">
+                     Tequila, Cointreau, suco de limão e um toque de maracujá.
+                  </p>
+               </div>
+               <div
+                  class="bg-gray-800 p-6 rounded-lg shadow-xl card-hover scroll-reveal delay-300 text-center"
+               >
+                  <img
+                     src="img/drink-old-fashioned.jpg"
+                     alt="Old Fashioned"
+                     class="w-full h-48 object-cover rounded mb-4"
+                  />
+                  <h3 class="text-2xl font-bold text-white mb-2">
+                     Old Fashioned
+                  </h3>
+                  <p class="text-gray-400">
+                     Whisky, açúcar, bitters e um toque de laranja.
+                  </p>
+               </div>
+               <div
+                  class="bg-gray-800 p-6 rounded-lg shadow-xl card-hover scroll-reveal delay-400 text-center"
+               >
+                  <img
+                     src="img/drink-gin-tonic.jpg"
+                     alt="Gin Tônica"
+                     class="w-full h-48 object-cover rounded mb-4"
+                  />
+                  <h3 class="text-2xl font-bold text-white mb-2">
+                     Gin Tônica Style
+                  </h3>
+                  <p class="text-gray-400">
+                     Gin premium, água tônica e botânicos selecionados.
+                  </p>
+               </div>
+               <div
+                  class="bg-gray-800 p-6 rounded-lg shadow-xl card-hover scroll-reveal delay-500 text-center"
+               >
+                  <img
+                     src="img/drink-aperol.jpg"
+                     alt="Aperol Spritz"
+                     class="w-full h-48 object-cover rounded mb-4"
+                  />
+                  <h3 class="text-2xl font-bold text-white mb-2">
+                     Aperol Spritz
+                  </h3>
+                  <p class="text-gray-400">
+                     Aperol, prosecco, água com gás e fatia de laranja.
+                  </p>
+               </div>
+            </div>
+
+            <div
+               id="nao-alcoolicos"
+               class="tab-content hidden grid md:grid-cols-3 gap-8"
+            >
+               <div
+                  class="bg-gray-800 p-6 rounded-lg shadow-xl card-hover scroll-reveal text-center"
+               >
+                  <img
+                     src="img/mocktail-morango.jpg"
+                     alt="Morango Refrescante"
+                     class="w-full h-48 object-cover rounded mb-4"
+                  />
+                  <h3 class="text-2xl font-bold text-white mb-2">
+                     Morango Refrescante
+                  </h3>
+                  <p class="text-gray-400">
+                     Morangos frescos, suco de limão, xarope de açúcar e água
+                     com gás.
+                  </p>
+               </div>
+               <div
+                  class="bg-gray-800 p-6 rounded-lg shadow-xl card-hover scroll-reveal delay-100 text-center"
+               >
+                  <img
+                     src="img/mocktail-pina-colada.jpg"
+                     alt="Pina Colada Zero"
+                     class="w-full h-48 object-cover rounded mb-4"
+                  />
+                  <h3 class="text-2xl font-bold text-white mb-2">
+                     Pina Colada Zero
+                  </h3>
+                  <p class="text-gray-400">
+                     Abacaxi, leite de coco e um toque de xarope de coco.
+                  </p>
+               </div>
+               <div
+                  class="bg-gray-800 p-6 rounded-lg shadow-xl card-hover scroll-reveal delay-200 text-center"
+               >
+                  <img
+                     src="img/mocktail-citrus.jpg"
+                     alt="Citrus Sunrise"
+                     class="w-full h-48 object-cover rounded mb-4"
+                  />
+                  <h3 class="text-2xl font-bold text-white mb-2">
+                     Citrus Sunrise
+                  </h3>
+                  <p class="text-gray-400">
+                     Suco de laranja, suco de grenadine, um toque de limão e
+                     soda.
+                  </p>
+               </div>
+               <div
+                  class="bg-gray-800 p-6 rounded-lg shadow-xl card-hover scroll-reveal delay-300 text-center"
+               >
+                  <img
+                     src="img/mocktail-frutas-vermelhas.jpg"
+                     alt="Frutas Vermelhas Fizz"
+                     class="w-full h-48 object-cover rounded mb-4"
+                  />
+                  <h3 class="text-2xl font-bold text-white mb-2">
+                     Frutas Vermelhas Fizz
+                  </h3>
+                  <p class="text-gray-400">
+                     Mix de frutas vermelhas, suco de maçã e água tônica.
+                  </p>
+               </div>
+               <div
+                  class="bg-gray-800 p-6 rounded-lg shadow-xl card-hover scroll-reveal delay-400 text-center"
+               >
+                  <img
+                     src="img/mocktail-hortela.jpg"
+                     alt="Hortelã Fresh"
+                     class="w-full h-48 object-cover rounded mb-4"
+                  />
+                  <h3 class="text-2xl font-bold text-white mb-2">
+                     Hortelã Fresh
+                  </h3>
+                  <p class="text-gray-400">
+                     Hortelã fresca, pepino, suco de limão e ginger ale.
+                  </p>
+               </div>
+               <div
+                  class="bg-gray-800 p-6 rounded-lg shadow-xl card-hover scroll-reveal delay-500 text-center"
+               >
+                  <img
+                     src="img/mocktail-mango.jpg"
+                     alt="Mango Tango"
+                     class="w-full h-48 object-cover rounded mb-4"
+                  />
+                  <h3 class="text-2xl font-bold text-white mb-2">
+                     Mango Tango
+                  </h3>
+                  <p class="text-gray-400">
+                     Purê de manga, suco de laranja, um toque de pimenta e
+                     limão.
+                  </p>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <section id="galeria" class="py-20 bg-gray-950">
+         <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold text-lime-400 mb-12 scroll-reveal">
+               Nossa Galeria
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+               <div
+                  class="overflow-hidden rounded-lg shadow-xl card-hover scroll-reveal"
+               >
+                  <img
+                     src="img/galeria-01.jpg"
+                     alt="Bartender em ação"
+                     class="w-full h-64 object-cover transform hover:scale-105 transition duration-500"
+                  />
+               </div>
+               <div
+                  class="overflow-hidden rounded-lg shadow-xl card-hover scroll-reveal delay-100"
+               >
+                  <img
+                     src="img/galeria-02.jpg"
+                     alt="Drinks em casamento"
+                     class="w-full h-64 object-cover transform hover:scale-105 transition duration-500"
+                  />
+               </div>
+               <div
+                  class="overflow-hidden rounded-lg shadow-xl card-hover scroll-reveal delay-200"
+               >
+                  <img
+                     src="img/galeria-03.jpg"
+                     alt="Bar em evento corporativo"
+                     class="w-full h-64 object-cover transform hover:scale-105 transition duration-500"
+                  />
+               </div>
+               <div
+                  class="overflow-hidden rounded-lg shadow-xl card-hover scroll-reveal delay-300"
+               >
+                  <img
+                     src="img/galeria-04.jpg"
+                     alt="Coquetéis criativos"
+                     class="w-full h-64 object-cover transform hover:scale-105 transition duration-500"
+                  />
+               </div>
+               <div
+                  class="overflow-hidden rounded-lg shadow-xl card-hover scroll-reveal delay-400"
+               >
+                  <img
+                     src="img/galeria-05.jpg"
+                     alt="Mocktails refrescantes"
+                     class="w-full h-64 object-cover transform hover:scale-105 transition duration-500"
+                  />
+               </div>
+               <div
+                  class="overflow-hidden rounded-lg shadow-xl card-hover scroll-reveal delay-500"
+               >
+                  <img
+                     src="img/galeria-06.jpg"
+                     alt="Decoração de bar"
+                     class="w-full h-64 object-cover transform hover:scale-105 transition duration-500"
+                  />
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <section
+         id="depoimentos"
+         class="relative py-20 bg-gray-900 overflow-hidden"
+      >
+         <div
+            class="absolute inset-0 bg-cover bg-center opacity-10"
+            style="background-image: url('img/depoimentos-background.jpg')"
+         ></div>
+         <div class="container mx-auto px-6 text-center relative z-10">
+            <h2 class="text-4xl font-bold text-fuchsia-500 mb-12 scroll-reveal">
+               O que dizem Nossos Clientes
+            </h2>
+            <div
+               id="testimonial-carousel"
+               class="max-w-3xl mx-auto h-48 flex items-center justify-center"
+            >
+               <div class="testimonial-item text-white scroll-reveal active">
+                  <p class="text-xl md:text-2xl italic leading-relaxed mb-6">
+                     "A equipe Bartender Style transformou nossa festa de
+                     casamento! Drinks incríveis, serviço impecável e um toque
+                     de sofisticação que superou todas as expectativas."
+                  </p>
+                  <p class="text-lg font-semibold text-lime-400">
+                     - Mariana e Lucas S.
+                  </p>
+               </div>
+               <div class="testimonial-item text-white scroll-reveal hidden">
+                  <p class="text-xl md:text-2xl italic leading-relaxed mb-6">
+                     "Contratamos para nosso evento corporativo e foi um
+                     sucesso! Os mocktails eram tão criativos quanto os
+                     coquetéis. Profissionalismo e sabor em cada detalhe."
+                  </p>
+                  <p class="text-lg font-semibold text-lime-400">
+                     - Sofia P., Gerente de Eventos
+                  </p>
+               </div>
+               <div class="testimonial-item text-white scroll-reveal hidden">
+                  <p class="text-xl md:text-2xl italic leading-relaxed mb-6">
+                     "Nunca imaginei que um bar de drinks em casa seria tão
+                     divertido e elegante. Os bartenders eram carismáticos e os
+                     drinks... uau! Recomendo de olhos fechados."
+                  </p>
+                  <p class="text-lg font-semibold text-lime-400">- Pedro H.</p>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <section
+         id="siga-instagram"
+         class="py-20 bg-gray-950 relative overflow-hidden"
+      >
+         <div
+            class="absolute inset-0 bg-cover bg-center opacity-10"
+            style="background-image: url('img/instagram-background.jpg')"
+         ></div>
+         <div class="container mx-auto px-6 text-center relative z-10">
+            <div
+               class="max-w-md mx-auto mb-10 shadow-xl rounded-lg overflow-hidden scroll-reveal"
+            >
+               <video
+                  class="w-full h-auto"
+                  src="video/bartender_video.mp4"
+                  autoplay
+                  loop
+                  muted
+                  playsinline
+               >
+                  Seu navegador não suporta o elemento de vídeo.
+               </video>
+            </div>
+
+            <h2
+               class="text-4xl md:text-5xl font-bold text-gradient-primary mb-6 scroll-reveal"
+            >
+               Veja Nossos Bastidores no Instagram
+            </h2>
+            <p
+               class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto scroll-reveal delay-200"
+            >
+               Siga nosso perfil e inspire-se com nossos drinks exclusivos, a
+               energia dos eventos e dicas de coquetelaria que só a Bartender
+               Style oferece!
+            </p>
+            <a
+               href="https://www.instagram.com/seuperfilnobartenderstyle/"
+               target="_blank"
+               class="inline-block bg-gradient-to-r from-fuchsia-500 to-lime-400 text-white font-bold py-4 px-12 rounded-full text-2xl hover:shadow-2xl transform hover:scale-105 transition duration-300 scroll-reveal delay-400"
+            >
+               <i class="fab fa-instagram mr-4"></i> Seguir Agora
+               @BartenderStyle
+            </a>
+         </div>
+      </section>
+
+      <section id="contato" class="py-20 bg-gray-900">
+         <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold text-lime-400 mb-12 scroll-reveal">
+               Entre em Contato
+            </h2>
+            <div
+               class="max-w-xl mx-auto bg-gray-800 p-10 rounded-lg shadow-xl scroll-reveal"
+            >
+               <p class="text-lg text-gray-300 mb-8">
+                  Pronto para elevar o nível do seu próximo evento? Preencha o
+                  formulário abaixo e nossa equipe entrará em contato em breve.
+               </p>
+               <form id="contact-form" class="space-y-6">
+                  <div>
+                     <input
+                        type="text"
+                        id="nome"
+                        name="nome"
+                        placeholder="Seu Nome"
+                        class="w-full bg-gray-700 text-white border-0 focus:ring-2 focus:ring-fuchsia-500 rounded-md px-4 py-3"
+                        required
+                     />
+                  </div>
+                  <div>
+                     <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Seu Email"
+                        class="w-full bg-gray-700 text-white border-0 focus:ring-2 focus:ring-fuchsia-500 rounded-md px-4 py-3"
+                        required
+                     />
+                  </div>
+                  <div>
+                     <input
+                        type="tel"
+                        id="telefone"
+                        name="telefone"
+                        placeholder="Seu Telefone (opcional)"
+                        class="w-full bg-gray-700 text-white border-0 focus:ring-2 focus:ring-fuchsia-500 rounded-md px-4 py-3"
+                     />
+                  </div>
+                  <div>
+                     <textarea
+                        id="mensagem"
+                        name="mensagem"
+                        rows="5"
+                        placeholder="Descreva seu evento e o que você precisa..."
+                        class="w-full bg-gray-700 text-white border-0 focus:ring-2 focus:ring-fuchsia-500 rounded-md px-4 py-3"
+                        required
+                     ></textarea>
+                  </div>
+                  <button
+                     type="submit"
+                     class="w-full bg-gradient-to-r from-fuchsia-500 to-lime-400 text-white font-bold py-3 px-8 rounded-full text-xl hover:shadow-lg transform hover:scale-105 transition duration-300"
+                  >
+                     Enviar via WhatsApp
+                  </button>
+               </form>
+            </div>
+            <div class="mt-12 text-center text-gray-400 text-lg scroll-reveal">
+               <p class="mb-2">
+                  <i class="fas fa-envelope mr-3 text-lime-400"></i>
+                  contato@bartenderstyle.com
+               </p>
+               <p>
+                  <i class="fas fa-phone mr-3 text-lime-400"></i> (XX) XXXX-XXXX
+               </p>
+            </div>
+         </div>
+      </section>
+
+      <footer class="bg-gray-800 py-8 text-center text-gray-400">
+         <div class="container mx-auto px-6">
+            <p>&copy; 2024 Bartender Style. Todos os direitos reservados.</p>
+            <div class="flex justify-center mt-4">
+               <a
+                  href="https://www.instagram.com/seuperfilnobartenderstyle/"
+                  target="_blank"
+                  class="text-gray-400 hover:text-lime-400 transition duration-300"
+               >
+                  <i class="fab fa-instagram text-4xl"></i>
+               </a>
+            </div>
+         </div>
+      </footer>
+
+      <button id="backToTopBtn" title="Voltar ao Topo">
+         <i class="fas fa-arrow-up"></i>
+      </button>
+
+      <script>
+         document.addEventListener("DOMContentLoaded", () => {
+            // Smooth Scroll para links de navegação
+            document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+               anchor.addEventListener("click", function (e) {
+                  e.preventDefault();
+                  document
+                     .querySelector(this.getAttribute("href"))
+                     .scrollIntoView({
+                        behavior: "smooth",
+                     });
+               });
+            });
+
+            // Header Fixo com Transparência
+            const header = document.getElementById("site-header");
+            const heroSection = document.getElementById("hero");
+            const headerInitialOffset = header.offsetHeight; // Altura inicial do header
+
+            const updateHeaderBackground = () => {
+               if (
+                  window.scrollY >
+                  heroSection.offsetHeight - headerInitialOffset
+               ) {
+                  header.classList.add(
+                     "bg-gray-900",
+                     "bg-opacity-90",
+                     "backdrop-blur-sm"
+                  );
+                  header.classList.remove("bg-transparent");
+               } else {
+                  header.classList.remove(
+                     "bg-gray-900",
+                     "bg-opacity-90",
+                     "backdrop-blur-sm"
+                  );
+                  header.classList.add("bg-transparent");
+               }
+            };
+
+            window.addEventListener("scroll", updateHeaderBackground);
+            updateHeaderBackground(); // Chama uma vez para definir o estado inicial
+
+            // Scroll Reveal (Elementos aparecendo ao rolar)
+            const scrollRevealElements =
+               document.querySelectorAll(".scroll-reveal");
+
+            const observerOptions = {
+               root: null, // viewport como root
+               rootMargin: "0px",
+               threshold: 0.1, // 10% do elemento visível
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+               entries.forEach((entry) => {
+                  if (entry.isIntersecting) {
+                     entry.target.classList.add("visible");
+                     observer.unobserve(entry.target); // Para de observar após aparecer
+                  }
+               });
+            }, observerOptions);
+
+            scrollRevealElements.forEach((el) => {
+               observer.observe(el);
+            });
+
+            // Abas de Drinks
+            const tabButtons = document.querySelectorAll(".tab-button");
+            const tabContents = document.querySelectorAll(".tab-content");
+
+            tabButtons.forEach((button) => {
+               button.addEventListener("click", () => {
+                  // Remove 'active-tab' de todos os botões e 'active'/'hidden' dos conteúdos
+                  tabButtons.forEach((btn) => {
+                     btn.classList.remove(
+                        "active-tab",
+                        "bg-fuchsia-500",
+                        "bg-lime-400"
+                     );
+                     btn.classList.add("bg-gray-800"); // Garante que a cor padrão volte
+                  });
+                  tabContents.forEach((content) =>
+                     content.classList.add("hidden")
+                  );
+
+                  // Adiciona 'active-tab' ao botão clicado e mostra o conteúdo correspondente
+                  button.classList.add("active-tab");
+                  if (button.dataset.target === "alcoolicos") {
+                     button.classList.add("bg-fuchsia-500");
+                     button.classList.remove("bg-gray-800");
+                  } else {
+                     // nao-alcoolicos
+                     button.classList.add("bg-lime-400");
+                     button.classList.remove("bg-gray-800");
+                  }
+                  document
+                     .getElementById(button.dataset.target)
+                     .classList.remove("hidden");
+
+                  // Reinicia o scroll reveal para o conteúdo da nova aba
+                  document
+                     .getElementById(button.dataset.target)
+                     .querySelectorAll(".scroll-reveal")
+                     .forEach((el) => {
+                        el.classList.remove("visible"); // Remove para que possa animar novamente
+                        // Pequeno delay para garantir que a animação ocorra após o display mudar
+                        setTimeout(() => observer.observe(el), 50);
+                     });
+               });
+            });
+
+            // Ativa a primeira aba por padrão ao carregar a página
+            if (tabButtons.length > 0) {
+               tabButtons[0].click();
+            }
+
+            // Formulário WhatsApp
+            const contactForm = document.getElementById("contact-form");
+            contactForm.addEventListener("submit", function (e) {
+               e.preventDefault(); // Impede o envio padrão do formulário
+
+               // <<< IMPORTANTE: TROQUE ESTE NÚMERO PELO SEU NÚMERO DE WHATSAPP >>>
+               // Formato: Código do País + DDD + Número (tudo junto, sem + ou -)
+               const seuNumeroWhatsApp = "5511999998888";
+               // Exemplo para São Paulo: "5511987654321"
+
+               // Pega os valores dos campos
+               const nome = document.getElementById("nome").value;
+               const email = document.getElementById("email").value;
+               const telefone = document.getElementById("telefone").value;
+               const mensagem = document.getElementById("mensagem").value;
+
+               // Formata a mensagem para o WhatsApp
+               // Usamos *texto* para negrito no WhatsApp
+               let textoMensagem = `Olá, *Bartender Style*! 👋\n\nEu gostaria de um orçamento.\n\n`;
+               textoMensagem += `*Nome:* ${nome}\n`;
+               textoMensagem += `*Email:* ${email}\n`;
+
+               if (telefone) {
+                  textoMensagem += `*Telefone:* ${telefone}\n`;
+               }
+
+               textoMensagem += `\n*Detalhes do Evento:*\n${mensagem}`;
+
+               // Codifica a mensagem para uma URL
+               const mensagemCodificada = encodeURIComponent(textoMensagem);
+
+               // Cria o link do WhatsApp
+               const urlWhatsApp = `https://wa.me/${seuNumeroWhatsApp}?text=${mensagemCodificada}`;
+
+               // Abre o WhatsApp em uma nova aba
+               window.open(urlWhatsApp, "_blank");
+            });
+
+            // Carrossel de Depoimentos
+            const testimonialItems =
+               document.querySelectorAll(".testimonial-item");
+            let currentTestimonial = 0;
+
+            const showTestimonial = (index) => {
+               testimonialItems.forEach((item, i) => {
+                  if (i === index) {
+                     item.classList.remove("hidden");
+                     item.classList.add("visible"); // Para aplicar o scroll-reveal
+                  } else {
+                     item.classList.add("hidden");
+                     item.classList.remove("visible");
+                  }
+               });
+            };
+
+            const nextTestimonial = () => {
+               currentTestimonial =
+                  (currentTestimonial + 1) % testimonialItems.length;
+               showTestimonial(currentTestimonial);
+            };
+
+            // Inicia o carrossel (primeiro depoimento visível, depois troca a cada 5 segundos)
+            if (testimonialItems.length > 0) {
+               showTestimonial(currentTestimonial);
+               setInterval(nextTestimonial, 5000); // Troca a cada 5 segundos
+            }
+
+            // Acordeão (FAQ)
+            const accordionHeaders =
+               document.querySelectorAll(".accordion-header");
+
+            accordionHeaders.forEach((header) => {
+               header.addEventListener("click", () => {
+                  const content = header.nextElementSibling; // O conteúdo é o próximo irmão
+
+                  // Fecha outros abertos (opcional, mas bom para um FAQ limpo)
+                  accordionHeaders.forEach((otherHeader) => {
+                     if (
+                        otherHeader !== header &&
+                        otherHeader.classList.contains("active")
+                     ) {
+                        otherHeader.classList.remove("active");
+                        otherHeader.nextElementSibling.classList.remove("open");
+                     }
+                  });
+
+                  // Alterna o estado do item clicado
+                  header.classList.toggle("active");
+                  content.classList.toggle("open");
+               });
+            });
+
+            // Botão de Voltar ao Topo
+            const backToTopBtn = document.getElementById("backToTopBtn");
+
+            window.onscroll = function () {
+               scrollFunction();
+            };
+
+            function scrollFunction() {
+               if (
+                  document.body.scrollTop > 300 ||
+                  document.documentElement.scrollTop > 300
+               ) {
+                  backToTopBtn.style.display = "block";
+               } else {
+                  backToTopBtn.style.display = "none";
+               }
+            }
+
+            backToTopBtn.addEventListener("click", () => {
+               window.scrollTo({
+                  top: 0,
+                  behavior: "smooth",
+               });
+            });
+         });
+      </script>
+   </body>
+</html>
